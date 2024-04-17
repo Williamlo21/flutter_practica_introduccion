@@ -47,23 +47,41 @@ class HomeScreen extends StatelessWidget {
               ),
               const Padding(
                 padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
-                child:  Text(
-                  
+                child: Text(
                   'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(color: Colors.grey),
                 ),
               ),
-              SizedBox(
+              Container(
                 width: double.infinity,
                 height: 200,
                 child:
                     // Text("hola mundo"),
                     Image.network(
-                  "https://media.gq.com.mx/photos/622f89b2ea1d03f2815e74e4/16:9/w_2560%2Cc_limit/132.jpg",
-                  fit: BoxFit.cover,
-                ),
+                        "https://media.gq.com.mx/photos/622f89b2ea1d03f2815e74e4/16:9/w_2560%2Cc_limit/132.jpg",
+                        fit: BoxFit.cover, errorBuilder: (BuildContext context,
+                            Object error, StackTrace? stackTrace) {
+                  return Container(
+                    child: Center(
+                      child: Text('No se pudo cargar la imagen'),
+                    ),
+                  );
+                }, loadingBuilder: (BuildContext context, Widget child,
+                            ImageChunkEvent? loadingProgress) {
+                  if (loadingProgress == null) {
+                    return child; // Retorna la imagen si la carga ha finalizado
+                  }
+                  return Center(
+                    child: CircularProgressIndicator(
+                      value: loadingProgress.expectedTotalBytes != null
+                          ? loadingProgress.cumulativeBytesLoaded /
+                              (loadingProgress.expectedTotalBytes ?? 1)
+                          : null,
+                    ),
+                  );
+                }),
               ),
               Container(
                 child: Row(
