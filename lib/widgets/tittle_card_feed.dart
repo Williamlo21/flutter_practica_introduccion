@@ -12,15 +12,15 @@ class TittleCardFeed extends StatelessWidget {
       padding: const EdgeInsets.all(10),
       child: Row(
         children: [
-          CircleAvatar(
+          const CircleAvatar(
             child: Text("W"),
           ),
-          SizedBox(
+          const SizedBox(
             width: 10,
           ),
           Text(
             name,
-            style: TextStyle(
+            style: const TextStyle(
                 color: Color.fromARGB(239, 54, 52, 52),
                 fontWeight: FontWeight.bold),
           ),

@@ -5,22 +5,20 @@ class ImageCardFeed extends StatelessWidget {
   final String image;
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       height: 200,
       child:
           // Text("hola mundo"),
-          Image.network(
-              image,
-              fit: BoxFit.cover, errorBuilder:
-                  (BuildContext context, Object error, StackTrace? stackTrace) {
+          Image.network(image, fit: BoxFit.cover, errorBuilder:
+              (BuildContext context, Object error, StackTrace? stackTrace) {
         return const SizedBox(
           child: Center(
             child: Text('No se pudo cargar la imagen'),
           ),
         );
       }, loadingBuilder: (BuildContext context, Widget child,
-                  ImageChunkEvent? loadingProgress) {
+              ImageChunkEvent? loadingProgress) {
         if (loadingProgress == null) {
           return child; // Retorna la imagen si la carga ha finalizado
         }
